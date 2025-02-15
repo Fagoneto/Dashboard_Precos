@@ -33,32 +33,32 @@ def to_excel(dados):
 #st.write(precos_carrefour_prod.head(5))
 
 
-# Criando DataFrame por Produto
-### Encontrando os produtos que ocorrem com mais frequencia
-occur = df_precos.groupby(['produto']).count()
-c = occur.sort_values(by=['data'], ascending=False).reset_index()
-c = c[['produto', 'preco', 'estado']]
-c = c.rename(columns={'preco': 'Frequência'})
+# # Criando DataFrame por Produto
+# ### Encontrando os produtos que ocorrem com mais frequencia
+# occur = df_precos.groupby(['produto']).count()
+# c = occur.sort_values(by=['data'], ascending=False).reset_index()
+# c = c[['produto', 'preco', 'estado']]
+# c = c.rename(columns={'preco': 'Frequência'})
 
-# Criando DataFrame por Cidade
-### Encontrando os produtos que ocorrem com mais frequencia
-occur2 = df_precos.groupby(['cidade/UF']).count().reset_index()
-d = occur2.sort_values(by=['data'], ascending=False)
-d = d[['cidade/UF', 'data', 'estado']]
-d = d.rename(columns={'data': 'Frequência'})
-
-
-if st.checkbox('Deseja ver a tabela de frequência de produtos e das cidades coletadas?'):
-    col1, col2 = st.columns(2)
-
-    with col1:
-        num_pro = str(len(df_precos.produto.unique()))
-        st.write("Número de produtos disponíveis: "+ num_pro, c)
+# # Criando DataFrame por Cidade
+# ### Encontrando os produtos que ocorrem com mais frequencia
+# occur2 = df_precos.groupby(['cidade/UF']).count().reset_index()
+# d = occur2.sort_values(by=['data'], ascending=False)
+# d = d[['cidade/UF', 'data', 'estado']]
+# d = d.rename(columns={'data': 'Frequência'})
 
 
-    with col2:
-        num_cidades = str(len(df_precos['cidade/UF'].unique()))
-        st.write("Número de cidades coletadas: "+ num_cidades, d)
+# if st.checkbox('Deseja ver a tabela de frequência de produtos e das cidades coletadas?'):
+#     col1, col2 = st.columns(2)
+
+#     with col1:
+#         num_pro = str(len(df_precos.produto.unique()))
+#         st.write("Número de produtos disponíveis: "+ num_pro, c)
+
+
+#     with col2:
+#         num_cidades = str(len(df_precos['cidade/UF'].unique()))
+#         st.write("Número de cidades coletadas: "+ num_cidades, d)
     
 
 
@@ -184,25 +184,25 @@ st.plotly_chart(fig2, use_container_width = True,height=400)
 
 
 
-st.markdown(
-        """
-        Seleção por cidade
+# st.markdown(
+#         """
+#         Seleção por cidade
 
-        **👈 
-    """
-    )
+#         **👈 
+#     """
+#     )
 
 
-st.write("Selecione uma cidade: ")
-select_city = st.selectbox("Lista de Cidades", df['cidade/UF'].unique())
-if not select_city:
-    st.error("Por favor, escolha pelo menos uma cidade.")
-else:
-    precos_carrefour_city = df[df['cidade/UF'].isin([select_city])]
-    precos_carrefour_city = precos_carrefour_city.sort_values(by=['preco'], ascending=False).reset_index()
-    st.write("Tabela de Preços de: ",precos_carrefour_city[['produto', 'preco', 'desconto', 'loja']])
+# st.write("Selecione uma cidade: ")
+# select_city = st.selectbox("Lista de Cidades", df['cidade/UF'].unique())
+# if not select_city:
+#     st.error("Por favor, escolha pelo menos uma cidade.")
+# else:
+#     precos_carrefour_city = df[df['cidade/UF'].isin([select_city])]
+#     precos_carrefour_city = precos_carrefour_city.sort_values(by=['preco'], ascending=False).reset_index()
+#     st.write("Tabela de Preços de: ",precos_carrefour_city[['produto', 'preco', 'desconto', 'loja']])
 
     
-#down10 = to_excel(precos_carrefour_city)
-#st.download_button(label="Clique aqui para baixar a Tabela de Preços!", file_name="tabela_precos.xlsx", data = down10,  key=15)
+# #down10 = to_excel(precos_carrefour_city)
+# #st.download_button(label="Clique aqui para baixar a Tabela de Preços!", file_name="tabela_precos.xlsx", data = down10,  key=15)
 
